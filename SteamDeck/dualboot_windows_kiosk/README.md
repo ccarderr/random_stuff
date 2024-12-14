@@ -8,11 +8,11 @@ This tutorial describes how to install Windows alongside SteamOS, with the diffe
 - A USB drive with at least 8GB of capacity
 - USB / Bluetooth keyboard
 - An adapter or dock allowing the connection of two USB devices and ideally charging simultaneously
-- Image burning software (e.g., Rufus) - [https://rufus.ie/](https://rufus.ie/)
-- SteamOS image - [https://store.steampowered.com/steamos/download?ver=steamdeck](https://store.steampowered.com/steamos/download?ver=steamdeck)
-- Windows 11 image - [https://www.microsoft.com/en-us/software-download/windows11](https://www.microsoft.com/en-us/software-download/windows11)
-- AtlasOS Playbook and AME Wizard - [https://atlasos.net/](https://atlasos.net/)
-- SteamDeck drivers for Windows - [https://help.steampowered.com/en/faqs/view/6121-ECCD-D643-BAA8](https://help.steampowered.com/en/faqs/view/6121-ECCD-D643-BAA8)
+- Image burning software (e.g., Rufus) - [LINK](https://rufus.ie/)
+- SteamOS image - [LINK](https://store.steampowered.com/steamos/download?ver=steamdeck)
+- Windows 11 image - [LINK](https://www.microsoft.com/en-us/software-download/windows11)
+- AtlasOS Playbook and AME Wizard - [LINK](https://atlasos.net/)
+- SteamDeck drivers for Windows - [LINK](https://help.steampowered.com/en/faqs/view/6121-ECCD-D643-BAA8)
 
 ## SteamOS Imaging (Optional)
 It is recommended to restore the SteamDeck to factory settings using an imaging tool to avoid any potential issues caused by mods or other modifications. If you want to preserve your settings, you can skip this step, but I would recommend creating a full disk image as a backup in case you need to restore it later.
@@ -21,7 +21,8 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Press Vol- and Power simultaneously to open the boot menu.
 - Select the USB drive from the list to boot the SteamOS installer.
 - Reimage SteamOS using the shortcut on the desktop.
-- After the imaging is complete, do not reboot; instead, go directly to ##Partitioning.
+- After the imaging is complete, do not reboot; instead, go directly to [#Partitioning](#partitioning).
+
 
 ## Partitioning
 - Switch to Desktop mode in SteamOS (if imaging was skipped).
@@ -33,4 +34,13 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Apply the changes.
 - If you skipped imaging and cannot resize the partition from SteamOS, reboot into the SteamOS installer and perform the partitioning there.
 
+## Initial Setup
+- If you haven't done so already, complete the initial setup of SteamOS and update the system in the settings.
+
+## Instalowanie systemu Windows
+- Wypal obraz systemu windows na pendrive używajac Rufus
+- Wciśnij Vol- i Power jednocześnie przy wyłaczonym SteamDecku aby wejśc w boot menu
+- Wybierz pendrive z listy aby uruchomić instalator Windows
+- 
+  
 (work in progress)
