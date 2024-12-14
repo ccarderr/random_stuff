@@ -65,8 +65,8 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Go to the Task Scheduler library and create a new task (not a basic task).
 - Enter the name "Autostart Steam," and check the option to run with highest privileges at the bottom of the window.
 - Go to the Triggers tab, add a new trigger, start the task at user login, and select your user as the specified user. Apply.
-- Go to the Actions tab, add a new action, and copy the path to the program and the Startup folder from the Steam shortcut properties on your desktop.
-- Add the arguments "-noverifyfiles -gamepadui," and apply.
+- Go to the Actions tab, add a new action, and copy the path to the program from the Steam shortcut properties on your desktop.
+- Leave the "Start in" field empty, add the arguments "-noverifyfiles -tenfoot" and apply.
 - Go to the Conditions tab and uncheck all options.
 - Go to the Settings tab and uncheck the option to stop the task if it runs longer than X days.
 - Click OK to create the task.
