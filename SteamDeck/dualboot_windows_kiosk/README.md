@@ -37,10 +37,11 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 ## Initial Setup
 - If you haven't done so already, complete the initial setup of SteamOS and update the system in the settings.
 
-## Instalowanie systemu Windows
-- Wypal obraz systemu windows na pendrive używajac Rufus
-- Wciśnij Vol- i Power jednocześnie przy wyłaczonym SteamDecku aby wejśc w boot menu
-- Wybierz pendrive z listy aby uruchomić instalator Windows
-- 
+## Installing Windows
+- Burn the Windows image to a USB drive using Rufus, making sure the options to remove requirements (RAM, SecureBoot, TPM, and Microsoft account) are selected.
+- Press Vol- and Power simultaneously with the SteamDeck powered off to enter the boot menu.
+- Select the USB drive from the list to launch the Windows installer.
+- Install the system on the previously prepared partition. If an error appears, delete the partition and install it in the unallocated space.
+
   
 (work in progress)
