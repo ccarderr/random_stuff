@@ -30,10 +30,10 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 ## Partitioning
 - Switch to Desktop mode in SteamOS (if imaging was skipped).
 - Launch the partitioning tool (Menu > System > KDE Partition Manager).
-- Select the internal disk, right-click on the /home partition, and choose "Resize/Move".
+- Select the internal disk, right-click on the /home partition, and choose "Resize/Move."
 - Reduce the partition size by 500GB (for a 2TB disk), adjusting the value based on your disk capacity and how many games will be installed on Windows. Sizes can be changed later.
-- Right-click on the free space and create an NTFS partition for Windows, leaving about 50MB of free space at the end of the disk.
-- Right-click on the remaining 50MB of free space and create an exFAT partition (if it throws an error, reduce the size by 1MB until it works).
+- Right-click on the free space and create a 50MB exFAT partition (this will be needed later).
+- Leave the remaining space empty for the Windows installer.
 - Apply the changes.
 - If you skipped imaging and cannot resize the partition from SteamOS, reboot into the SteamOS installer and perform the partitioning there.
 
@@ -45,10 +45,41 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Press Vol- and Power simultaneously with the SteamDeck powered off to enter the boot menu.
 - Select the USB drive from the list to launch the Windows installer.
 - Install the system on the previously prepared partition. If an error appears, delete the partition and install it in the unallocated space.
-- When prompted to connect to WiFi, select "I don't have internet".
+- When prompted to connect to WiFi, select "I don't have internet."
 - Create a local account, the name can be something like "deck" as in SteamOS.
 - It is advised not to create a password. If needed, you can configure auto-login later.
-- Continue the installation.
+- Continue the installation until Windows boots up.
+
+## SteamOS - Checking the GPT Table
+- With newer Windows 11 installers, there is a high chance that the GPT table of the disk may have been corrupted, making it impossible to boot SteamOS.
+- Check if SteamOS can still boot. Enter the boot menu and see if "SteamOS" is still listed.
+- Select SteamOS if it appears in the list. If SteamOS is not on the list or if the GRUB console appears instead of the system, it most likely indicates a corrupted GPT table.
+- If SteamOS boots normally, skip the GPT table repair process.
+
+## SteamOS - Repairing the GPT Table - Part 1 (Optional)
+- Connect the USB drive with the SteamOS installer, then boot into the installer.
+- Launch the "Terminal with repair tools" shortcut.
+- Type `lsblk` and press Enter. The "nvme0n1" disk should display at least 8 partitions, but it's likely that none will appear.
+- Run the command `sudo fdisk -l /dev/nvme0n1`. You should see a red warning that the GPT table is corrupted, but a backup is available, along with a list of detected partitions.
+- Run the command `sudo fdisk /dev/nvme0n1` to start the fdisk tool. The same warning should appear.
+- Type `p` and press Enter. A list of detected SteamOS and Windows partitions should appear.
+- Type `w` and press Enter to overwrite the GPT table with its recovered copy.
+- Reboot into the boot menu, select SteamOS from the list, and check if it boots normally.
+- If SteamOS is not listed, proceed to the second part of the repair. If SteamOS is listed and boots, skip the second part.
+
+## SteamOS - Repairing the GPT Table - Part 2 (Optional)
+- Press Vol+ and Power simultaneously while the SteamDeck is off to enter the BIOS menu.
+- Select "Boot From File", then choose the file path: ESP > efi > steamos > steamcl.efi.
+- SteamOS should boot up. Proceed with the initial setup if it hasn't been done already, then switch to Desktop mode.
+- Open the Konsole terminal.
+- If the sudo password hasn't been set yet, use the command `passwd` to set it.
+- Enter the following command to add SteamOS to the boot menu: `sudo efibootmgr -c -d /dev/nvme0n1 -p 1 -L "SteamOS" -l "\EFI\steamos\steamcl.efi"`.
+- Enter your password when prompted.
+- Reboot the SteamDeck into the boot menu, select SteamOS from the list, and the system should boot.
+
+## SteamOS - Restoring SteamOS as the Default OS (Without Installing Any Bootloaders)
+- I believe that with this method of using Windows, there is no need to install a bootloader. Booting into Windows will only be necessary for (de)installing and configuring games, with the script responsible for switching between systems. Instead, UEFI can be repaired to boot SteamOS by default.
+- ... (WiP)
 
 ## Windows - Setup
 - Optionally, to increase convenience, you can install remote assistance software (e.g., AnyDesk) and continue the setup by connecting from another computer.
@@ -85,7 +116,11 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - The remaining options are up to your discretion.
 - Gdy zakończysz konfigurację, kontunuuj. AME Wizard przeprowadzi optymalizację systemu i automatycznie uruchomi go ponownie.
 
-## ...
+## SteamOS - naprawa kolejnosci bootowania UEFI
+- Press Vol- and Power simultaneously with the SteamDeck powered off to enter the boot menu.
+- Wybierz SteamOS z listy
+- Po zbootowaniu SteamOS przejdź do trybu pulpitu
+- Podobnie jak w przypadku Windows, możesz użyć programu do zdalnej pomocy (np. AnyDesk) dla wygody.
 
   
 (work in progress)
