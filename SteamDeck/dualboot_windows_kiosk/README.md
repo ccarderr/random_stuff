@@ -78,10 +78,19 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Reboot the SteamDeck into the boot menu, select SteamOS from the list, and the system should boot.
 
 ## SteamOS - Restoring SteamOS as the Default OS (Without Installing Any Bootloaders)
-- I believe that with this method of using Windows, there is no need to install a bootloader. Booting into Windows will only be necessary for (de)installing and configuring games, with the script responsible for switching between systems. Instead, UEFI can be repaired to boot SteamOS by default.
-- ... (WiP)
+I believe that with this method of using Windows, there is no need to install a bootloader. Booting into Windows will only be necessary for (de)installing and configuring games, with the script responsible for switching between systems. Instead, UEFI can be repaired to boot SteamOS by default.
+- Switch SteamOS to Desktop mode.
+- Open the Konsole terminal.
+- If the sudo password hasn't been set yet, use the command `passwd` to set it.
+- Run the command `sudo mount /dev/nvme0n1p1 /mnt` to mount the EFI partition.
+- Run the command `sudo cp -r /mnt/EFI/Microsoft /mnt/EFI/Microsoft2` to create a copy of the Windows EFI folder.
+- Run the command `sudo cp /mnt/EFI/steamos/steamcl.efi /mnt/EFI/Microsoft2/Boot/bootmgfw.efi` to replace the Windows EFI with SteamOS's.
+- Run the command `sudo efibootmgr -c -d /dev/nvme0n1p1 -p 1 -L "SteamOS (custom)" -l '\EFI\Microsoft2\Boot\bootmgfw.efi'` to add a new entry to the boot menu.
+- Restart the system and go to the boot menu to ensure that the new entry appears at the top of the list.
+- SteamOS jest już gotowy, można już z niego normalnie kozrystać.
 
 ## Windows - Setup
+- Reboot into the boot menu, and boot into Windows.
 - Optionally, to increase convenience, you can install remote assistance software (e.g., AnyDesk) and continue the setup by connecting from another computer.
 - First, install the drivers (APU, WiFi, Bluetooth, SD card, and audio). The order for installing audio drivers can be found on the website from which you downloaded the drivers.
 - After installing the drivers, restart the system, adjust the screen orientation, and optionally reduce the scaling.
@@ -115,12 +124,6 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Core isolation can be disabled for better performance, but some anti-cheat systems may not like this, so it's up to you.
 - The remaining options are up to your discretion.
 - Gdy zakończysz konfigurację, kontunuuj. AME Wizard przeprowadzi optymalizację systemu i automatycznie uruchomi go ponownie.
-
-## SteamOS - naprawa kolejnosci bootowania UEFI
-- Press Vol- and Power simultaneously with the SteamDeck powered off to enter the boot menu.
-- Wybierz SteamOS z listy
-- Po zbootowaniu SteamOS przejdź do trybu pulpitu
-- Podobnie jak w przypadku Windows, możesz użyć programu do zdalnej pomocy (np. AnyDesk) dla wygody.
 
   
 (work in progress)
