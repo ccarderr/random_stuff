@@ -33,9 +33,12 @@ It is recommended to restore the SteamDeck to factory settings using an imaging 
 - Select the internal disk, right-click on the /home partition, and choose "Resize/Move."
 - Reduce the partition size by 500GB (for a 2TB disk), adjusting the value based on your disk capacity and how many games will be installed on Windows. Sizes can be changed later.
 - Right-click on the free space and create a 50MB exFAT partition (this will be needed later).
+- Right-click again on the exFAT partition, select "Properties," and in the "Label" field, enter `shared`, then click OK.
+- The label "shared" will be used by the scripts. If you want, you can assign a different name, but you will need to edit the scripts that reference this label.
 - Leave the remaining space empty for the Windows installer.
 - Apply the changes.
 - If you skipped imaging and cannot resize the partition from SteamOS, reboot into the SteamOS installer and perform the partitioning there.
+
 
 ## Initial Setup
 - If you haven't done so already, complete the initial setup of SteamOS and update the system in the settings.
@@ -87,7 +90,19 @@ I believe that with this method of using Windows, there is no need to install a 
 - Run the command `sudo cp /mnt/EFI/steamos/steamcl.efi /mnt/EFI/Microsoft2/Boot/bootmgfw.efi` to replace the Windows EFI with SteamOS's.
 - Run the command `sudo efibootmgr -c -d /dev/nvme0n1p1 -p 1 -L "SteamOS (custom)" -l '\EFI\Microsoft2\Boot\bootmgfw.efi'` to add a new entry to the boot menu.
 - Restart the system and go to the boot menu to ensure that the new entry appears at the top of the list.
-- SteamOS jest już gotowy, można już z niego normalnie kozrystać.
+- SteamOS is now ready, and you can start using it normally.
+
+## SteamOS - Mounting Shared Partition
+- Switch to Desktop mode in SteamOS.
+- Download the script [install_ccrr_mount_shared_partition_service.sh](./steamos/install_ccrr_mount_shared_partition_service.sh).
+- Right-click the file > Properties > Permissions, check "Is executable," and confirm with OK.
+- Right-click the script and select "Run in Konsole."
+- Enter the password when prompted.
+- From this point, the partition should be automatically mounted on startup in SteamOS.
+- To remove the partition mounting service, use the script [uninstall_ccrr_mount_shared_partition_service.sh](./steamos/uninstall_ccrr_mount_shared_partition_service.sh).
+
+## SteamOS - Instalacja skryptów
+- ...
 
 ## Windows - Setup
 - Reboot into the boot menu, and boot into Windows.
