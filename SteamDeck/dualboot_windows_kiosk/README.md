@@ -101,31 +101,29 @@ I believe that with this method of using Windows, there is no need to install a 
 - From this point, the partition should be automatically mounted on startup in SteamOS.
 - To remove the partition mounting service, use the script [uninstall_ccrr_mount_shared_partition_service.sh](./steamos/uninstall_ccrr_mount_shared_partition_service.sh).
 
-## SteamOS - Instalacja skryptów
-- ...
+## SteamOS - Script Installation
+- Open the file manager (Dolphin) and navigate to the newly mounted "shared" partition from the left-hand menu.
+- Create a new folder named "ccrr_kiosk" and navigate into it (you can name it differently if desired).
+- Download the scripts [ccrr_kiosk_reboot_to_windows.sh](./kiosk/ccrr_kiosk_reboot_to_windows.sh) and [ccrr_kiosk_watcher.ps1](./kiosk/ccrr_kiosk_watcher.ps1) and place them in the "ccrr_kiosk" directory.
+- The script for rebooting to Windows requires sudo, which normally prompts for a password, but this can be bypassed:
+- Open the file "ccrr_kiosk_reboot_to_windows.sh" with a text editor (Kate).
+- Locate the line `sudo_pass=""` and enter your sudo password between the quotation marks, e.g., `sudo_pass="my_pass"`, then save the file.
+- The initial configuration of SteamOS is now complete. We will proceed to Windows setup next.
 
 ## Windows - Setup
-- Reboot into the boot menu, and boot into Windows.
-- Optionally, to increase convenience, you can install remote assistance software (e.g., AnyDesk) and continue the setup by connecting from another computer.
-- First, install the drivers (APU, WiFi, Bluetooth, SD card, and audio). The order for installing audio drivers can be found on the website from which you downloaded the drivers.
-- After installing the drivers, restart the system, adjust the screen orientation, and optionally reduce the scaling.
-- Go to system settings, taskbar settings, hide unnecessary items, and make sure the on-screen keyboard button is always visible (this will be useful if SteamInput cannot be used).
+- Reboot into the boot menu and boot into Windows.
+- Optionally, for convenience, install remote assistance software (e.g., AnyDesk) and continue the setup from another computer.
+- Begin by installing the drivers: APU, WiFi, Bluetooth, SD card*, and audio. Follow the order specified for audio drivers on the website where you downloaded them.
+  - **[Important]** The SD card drivers may be unstable. If you do not plan to use an SD card, do not install these drivers. It's better to disable the SD card reader in Device Manager.
+- After installing the drivers, restart the system. Adjust the screen orientation and, optionally, reduce the scaling for better usability.
+- Open system settings, navigate to taskbar settings, hide unnecessary items, and ensure the on-screen keyboard button is always visible (this will help if SteamInput is unavailable).
 - Download and install Steam, then log in.
-- Go to system settings, Windows Update, download any available system and driver updates, and restart. After rebooting, make sure there are no more updates.
+- Go to system settings, Windows Update, download any available system and driver updates, and restart. After rebooting, verify that no further updates are available.
+- Optionally, hide the EFI partitions in "This PC":
+  - Right-click the Start menu and select **Disk Management**.
+  - Find the EFI partitions with an assigned drive letter, right-click it, and select **Change Drive Letter and Paths**. Then, remove the drive letter.
+  - You can also change the drive letter for the "shared" partition to one of your choice.
 
-## Windows - Elevate Steam
-- An important step is granting Steam administrator privileges so it can interact with applications requiring elevated permissions (as most online games do today). This will still not allow interaction with UAC windows, as they run as SYSTEM, and running Steam as SYSTEM would cause numerous issues.
-- Open Task Manager, go to the Startup tab, and disable Steam.
-- Right-click on the Start menu and select "Computer Management."
-- Go to the Task Scheduler library and create a new task (not a basic task).
-- Enter the name "Autostart Steam," and check the option to run with highest privileges at the bottom of the window.
-- Go to the Triggers tab, add a new trigger, start the task at user login, and select your user as the specified user. Apply.
-- Go to the Actions tab, add a new action, and copy the path to the program from the Steam shortcut properties on your desktop.
-- Leave the "Start in" field empty, add the arguments "-noverifyfiles -tenfoot" and apply.
-- Go to the Conditions tab and uncheck all options.
-- Go to the Settings tab and uncheck the option to stop the task if it runs longer than X days.
-- Click OK to create the task.
-- Restart the system, and Steam should launch in Big Picture mode with admin privileges.
 
 ## Windows - Atlas (recommended)
 - AME Wizard and Atlas are used to trim down the Windows system, improve its performance, disable Windows Update, and optionally disable Defender. This is not a required step, but Windows updates can be very bothersome, slowing down the SteamDeck and increasing the time it takes to switch between SteamOS and Windows. Keep in mind that Windows is originally resource-hungry, and the SteamDeck has just under 15GB of RAM.
@@ -138,7 +136,28 @@ I believe that with this method of using Windows, there is no need to install a 
 - Do not disable power-saving features, as we want to keep them active, since the SteamDeck mainly runs on battery.
 - Core isolation can be disabled for better performance, but some anti-cheat systems may not like this, so it's up to you.
 - The remaining options are up to your discretion.
-- Gdy zakończysz konfigurację, kontunuuj. AME Wizard przeprowadzi optymalizację systemu i automatycznie uruchomi go ponownie.
+- Once the configuration is complete, continue. AME Wizard will optimize the system and automatically reboot it.
 
+## Windows - Script Installation
+- First, open Steam, go to its settings, and disable the auto-start at system boot. Then, completely close Steam.
+- Go to "This PC" and make sure the "shared" partition is mounted (it has an assigned drive letter).
+- Right-click the Start menu and select "Computer Management."
+- Navigate to "Task Scheduler > Task Scheduler Library."
+- Select "Create Task" (not basic).
+- Enter the name "Autostart - Steam."
+- Check "Run with highest privileges" at the bottom.
+- Go to the "Triggers" tab and add a new one.
+- Set "Begin the task: At logon" and select "Specific user," then confirm with OK.
+- Go to the "Actions" tab and add a new one.
+- Choose "Action: Start a program."
+- In the "Program/script" field, enter `powershell`.
+- In the "Add arguments" field, enter `-WindowStyle Minimized -File F:\kiosk_mode\ccrr_kiosk_watcher.ps1` (adjust the file path to fit your configuration!).
+- Confirm with OK.
+- Go to the "Conditions" tab and uncheck all options.
+- Go to the "Settings" tab and uncheck "Stop the task if it runs longer than: x."
+- Create the new task by clicking OK.
+- To test if the task works, right-click the task and select "Run."
+- If set correctly, Steam should launch with administrator privileges.
+  - [Note] Administrator privileges are important for Steam Input to interact with elevated windows (like most online games). It will still not interact with UAC windows, as those run as SYSTEM.
   
 (work in progress)
