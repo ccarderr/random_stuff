@@ -1,5 +1,5 @@
 # Dualboot - Windows Kiosk Mode
-This tutorial describes how to install Windows alongside SteamOS, with the difference that it will only be used to run individual games in kiosk mode, leaving SteamOS as the main operating system. The setup will work by adding the game to the SteamOS library, and upon launching the game, the SteamDeck will reboot into Windows and start the game. After closing the game, it will reboot back into SteamOS.
+A guide and a set of scripts enabling the installation of Windows alongside SteamOS on internal storage. This setup allows launching Windows games from shortcuts in SteamOS while minimizing interaction with Windows itself. These shortcuts reboot the system into Windows and automatically launch the selected game without user interaction. When the game ends, the system automatically returns to SteamOS.
 
 ## Important Information
 This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a different set of drivers for Windows, which means there may be different issues that you will need to solve on your own.
