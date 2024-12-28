@@ -1,12 +1,11 @@
-(work in progress)
-
 # Dualboot - Windows Kiosk Mode
 This tutorial describes how to install Windows alongside SteamOS, with the difference that it will only be used to run individual games in kiosk mode, leaving SteamOS as the main operating system. The setup will work by adding the game to the SteamOS library, and upon launching the game, the SteamDeck will reboot into Windows and start the game. After closing the game, it will reboot back into SteamOS.
 
 ## Important Information
 This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a different set of drivers for Windows, which means there may be different issues that you will need to solve on your own.
 
-## Table of Contents - Installation and Configuration
+## Table of Contents
+- [Changelog](#changelog)
 - [Requirements](#requirements)
 - [SteamOS Imaging (Optional)](#steamos-imaging-optional)
 - [Partitioning](#partitioning)
@@ -21,12 +20,13 @@ This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a diff
 - [Windows - Setup](#windows---setup)
 - [Windows - Atlas (recommended)](#windows---atlas-recommended)
 - [Windows - Script Installation](#windows---script-installation)
---------
 - [Usage - Adding Windows Game Shortcuts to SteamOS](#usage---adding-windows-game-shortcuts-to-steamos)
 - [Usage - Adding a Shortcut to Windows (Without Launching the Game)](#usage---adding-a-shortcut-to-windows-without-launching-the-game)
 - [Usage - Optional Arguments](#usage---optional-arguments)
 - [Known Issues](#known-issues)
 
+## Changelog
+- **[28/12/2024]** - Initial working version of the instructions and scripts; updates will be made as needed.
 
 ## Requirements
 - Recomended 2TB of internal storage (500GB will be allocated to Windows)
@@ -231,6 +231,3 @@ I believe that with this method of using Windows, there is no need to install a 
     - Edit the file "\shared\kiosk_mode\ccrr_kiosk_reboot_to_windows.sh."
     - Find `boot_target=""` and set the number, e.g., `boot_target="0002"`.
     - From now on, automatic detection will be disabled, and the specified entry will be used.
-
-
-(work in progress)
