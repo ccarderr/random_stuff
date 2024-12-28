@@ -21,6 +21,11 @@ This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a diff
 - [Windows - Setup](#windows---setup)
 - [Windows - Atlas (recommended)](#windows---atlas-recommended)
 - [Windows - Script Installation](#windows---script-installation)
+--------
+- [Usage - Adding Windows Game Shortcuts to SteamOS](#usage---adding-windows-game-shortcuts-to-steamos)
+- [Usage - Adding a Shortcut to Windows (Without Launching the Game)](#usage---adding-a-shortcut-to-windows-without-launching-the-game)
+- [Usage - Optional Arguments](#usage---optional-arguments)
+- [Known Issues](#known-issues)
 
 
 ## Requirements
@@ -176,5 +181,56 @@ I believe that with this method of using Windows, there is no need to install a 
 - To test if the task works, right-click the task and select "Run."
 - If set correctly, Steam should launch with administrator privileges.
   - [Note] Administrator privileges are important for Steam Input to interact with elevated windows (like most online games). It will still not interact with UAC windows, as those run as SYSTEM.
-  
+- The setup is complete, and the script is ready for use.
+ 
+
+ 
+# Usage - Adding Windows Game Shortcuts to SteamOS
+- Reboot into Windows.
+- Install the desired game, it can be a Steam or non-Steam game.
+- For non-Steam games, add the game to your Steam library.
+- Right-click on the game in the Steam library and select Properties.
+- Add the launch argument `-ccrr_kiosk` and close the window (the script will monitor processes launched with this argument).
+  - For games launched from other stores (e.g., Epic), instead of adding the argument to the Steam library shortcut, add it to the game’s properties in the respective store. Otherwise, the script will monitor the store instead of the game, or if the store was already running in the background, the monitoring may fail.
+  - Similarly, this can be done for games where the launcher completely closes after the game starts (since the script monitors the launcher).
+- Right-click the game in the Steam library, select "Manage > Add Desktop Shortcut."
+- Open the properties of the newly created shortcut, copy the game ID from the URL (`steam://rungameid/game_id`).
+- Create a text file on the shared partition, e.g., "F:\\kiosk_mode\game_ids.txt."
+- Add a line to the file in the format "Game Name - game_id" for clarity. You can use this file to store Windows game IDs for later use.
+- That’s it for Windows. Reboot into SteamOS and switch to Desktop mode.
+- Open the file manager (Dolphin), navigate to "\shared\kiosk_mode," open the "game_ids.txt" file, and copy the game ID.
+- Open Steam, add a non-Steam game, click "Browse...", locate the file "\shared\kiosk_mode\ccrr_kiosk_reboot_to_windows.sh", and add it to Steam.
+- Right-click on the newly added item in the Steam library and select Properties.
+- Change the shortcut name to the game name.
+- Add the following arguments `-appid 01234 &` (replace 01234 with the game ID number, the "&" argument is mandatory and should always be at the end).
+- Close the properties window.
+- Run the game to test if everything works. The system should reboot into Windows and automatically launch the game in Big Picture mode without user interaction.
+
+# Usage - Adding a Shortcut to Windows (Without Launching the Game)
+- Add a shortcut to the script "\shared\kiosk_mode\ccrr_kiosk_reboot_to_windows.sh" without the `-appid` argument, leaving just `&` (this will launch Windows and Steam in Desktop mode, without monitoring the game).
+
+# Usage - Optional Arguments
+- `-nobigpicture` - When launching a game, Steam will start in desktop mode instead of Big Picture mode.
+
+# Known Issues
+- **When I launch a game on SteamOS, nothing happens**
+  - Ensure that the "shared" partition is mounted at system startup (automatic mounting typically occurs 5-10 seconds after SteamOS boots).
+  - Verify that you entered the correct sudo password in the "ccrr_kiosk_reboot_to_windows.sh" script.
+
+- **SteamOS reboots back to SteamOS instead of switching to Windows**
+  This behavior can be caused by two issues: either the Steam client (gamemode) restarts so quickly that the script fails to detect when it has been closed (SteamOS immediately restarts Steam in game mode when you close it via the command line), or the automatic detection of the Windows EFI entry fails.
+
+  - **If Steam restarts too quickly:**
+    - Try launching the game again or hold the power button to restart (NextBoot is likely still pointing to Windows).
+
+  - **If the Windows EFI entry is not detected correctly:**
+    - Switch to desktop mode.
+    - Open the terminal (Konsole).
+    - Run the command `efibootmgr -v`.
+    - Locate the "Windows Boot Manager" entry and note its number. For example, in "Boot0002* Windows Boot Manager", the number is "0002".
+    - Edit the file "\shared\kiosk_mode\ccrr_kiosk_reboot_to_windows.sh."
+    - Find `boot_target=""` and set the number, e.g., `boot_target="0002"`.
+    - From now on, automatic detection will be disabled, and the specified entry will be used.
+
+
 (work in progress)
