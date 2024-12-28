@@ -150,7 +150,7 @@ I believe that with this method of using Windows, there is no need to install a 
 
 
 ## Windows - Atlas (recommended)
-- AME Wizard and Atlas are used to trim down the Windows system, improve its performance, disable Windows Update, and optionally disable Defender. This is not a required step, but Windows updates can be very bothersome, slowing down the SteamDeck and increasing the time it takes to switch between SteamOS and Windows. Keep in mind that Windows is originally resource-hungry, and the SteamDeck has just under 15GB of RAM.
+AME Wizard and Atlas are used to trim down the Windows system, improve its performance, disable Windows Update, and optionally disable Defender. This is not a required step, but Windows updates can be very bothersome, slowing down the SteamDeck and increasing the time it takes to switch between SteamOS and Windows. Keep in mind that Windows is originally resource-hungry, and the SteamDeck has just under 15GB of RAM.
 - Launch the AME Wizard program and drag the AtlasPlaybook file to the appropriate area in the AME Wizard window.
 - Disable security features as instructed by the program, then proceed.
 - You will be presented with an option to disable Windows Defender. Since the system will only be used for gaming specific games, disabling it should not pose a significant risk if you do not plan to install anything from untrusted sources. However, the choice is yours - security or performance.
