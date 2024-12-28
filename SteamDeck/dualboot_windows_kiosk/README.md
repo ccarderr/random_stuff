@@ -6,16 +6,33 @@ This tutorial describes how to install Windows alongside SteamOS, with the diffe
 ## Important Information
 This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a different set of drivers for Windows, which means there may be different issues that you will need to solve on your own.
 
+## Table of Contents - Installation and Configuration
+- [Requirements](#requirements)
+- [SteamOS Imaging (Optional)](#steamos-imaging-optional)
+- [Partitioning](#partitioning)
+- [Initial Setup](#initial-setup)
+- [Windows - Installation](#windows---installation)
+- [SteamOS - Checking the GPT Table](#steamos---checking-the-gpt-table)
+- [SteamOS - Repairing the GPT Table - Part 1 (Optional)](#steamos---repairing-the-gpt-table---part-1-optional)
+- [SteamOS - Repairing the GPT Table - Part 2 (Optional)](#steamos---repairing-the-gpt-table---part-2-optional)
+- [SteamOS - Restoring SteamOS as the Default OS (Without Installing Any Bootloaders)](#steamos---restoring-steamos-as-the-default-os-without-installing-any-bootloaders)
+- [SteamOS - Mounting Shared Partition](#steamos---mounting-shared-partition)
+- [SteamOS - Script Installation](#steamos---script-installation)
+- [Windows - Setup](#windows---setup)
+- [Windows - Atlas (recommended)](#windows---atlas-recommended)
+- [Windows - Script Installation](#windows---script-installation)
+
+
 ## Requirements
-- 2TB of internal storage (500GB will be allocated to Windows)
+- Recomended 2TB of internal storage (500GB will be allocated to Windows)
 - A USB drive with at least 8GB of capacity
 - USB / Bluetooth keyboard
 - An adapter or dock allowing the connection of two USB devices and ideally charging simultaneously
 - Image burning software (e.g., Rufus) - [LINK](https://rufus.ie/)
 - SteamOS image - [LINK](https://store.steampowered.com/steamos/download?ver=steamdeck)
 - Windows 11 image - [LINK](https://www.microsoft.com/en-us/software-download/windows11)
-- AtlasOS Playbook and AME Wizard - [LINK](https://atlasos.net/)
 - SteamDeck drivers for Windows - [LINK](https://help.steampowered.com/en/faqs/view/6121-ECCD-D643-BAA8)
+- (optional) AtlasOS Playbook and AME Wizard - [LINK](https://atlasos.net/)
 
 ## SteamOS Imaging (Optional)
 It is recommended to restore the SteamDeck to factory settings using an imaging tool to avoid any potential issues caused by mods or other modifications. If you want to preserve your settings, you can skip this step, but I would recommend creating a full disk image as a backup in case you need to restore it later.
