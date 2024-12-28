@@ -1,8 +1,10 @@
 # Dualboot - Windows Kiosk Mode
 A guide and a set of scripts enabling the installation of Windows alongside SteamOS on internal storage. This setup allows launching Windows games from shortcuts in SteamOS while minimizing interaction with Windows itself. These shortcuts reboot the system into Windows and automatically launch the selected game without user interaction. When the game ends, the system automatically returns to SteamOS.
 
-## Important Information
-This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a different set of drivers for Windows, which means there may be different issues that you will need to solve on your own.
+## Important Information  
+- I am not responsible for any issues, data loss, etc. This guide and scripts were created for my personal use and are shared in good faith.  
+- This guide was created based on the SteamDeck LCD. The SteamDeck OLED has a different set of drivers for Windows, which means there may be different issues that you will need to solve on your own.
+
 
 ## Table of Contents
 - [Changelog](#changelog)
