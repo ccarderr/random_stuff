@@ -233,3 +233,10 @@ AME Wizard and Atlas are used to trim down the Windows system, improve its perfo
     - Edit the file "\shared\kiosk_mode\ccrr_kiosk_reboot_to_windows.sh."
     - Find `boot_target=""` and set the number, e.g., `boot_target="0002"`.
     - From now on, automatic detection will be disabled, and the specified entry will be used.
+
+- **The game launches, but the Steam overlay and SteamInput do not work**  
+  - Ensure that the script in the Task Scheduler library is being executed with administrator privileges.  
+  - If the game launcher or store disables the Steam overlay, try searching for a game-specific solution on Google.  
+  - You can try installing Handheld Companion or another button-mapping tool to emulate a classic controller, but you'll need to handle that on your own.  
+  - **[Note]** The simplest solution would be to install and configure GlossSI, which would enable controller mapping and overlay functionality for virtually any game. However, I couldn't get this tool to work myself—when launching a game with GlossSI, the entire system freezes so badly that only powering it off works. If you know a way to get GlossSI working, please let me know! 😉  
+
