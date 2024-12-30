@@ -3,8 +3,10 @@
 ## Table of Contents
 - [Linux](#linux)
   - [WiFi Delay Service](#wifi-delay-service)
+- [Tutorials](#tutorials)
+    - [[SteamDeck] Dualboot - Windows Kiosk Mode](#steamdeck-dualboot---windows-kiosk-mode)
 - [Tips and Tricks](#tips-and-tricks)
-  - [Preventing SteamDeck from Auto Update](#steamdeck-preventing-auto-update)
+  - [[SteamDeck] Preventing Auto Update](#steamdeck-preventing-auto-update)
   
 ## Linux
 
